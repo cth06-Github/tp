@@ -17,9 +17,9 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "
-                    + "contain numbers, with the following exceptions: " + ALIAS + ", " + SON_OF + ", "
-                    + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These exceptions can be used, but must only appear once."
-                    + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle of the name while "
+                    + "contain numbers. The name may contain special characters such as: " + ALIAS + ", " + SON_OF + ", "
+                    + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These characters must only appear once."
+                    + ALIAS + " OR " + SON_OF + " OR " + DAUGHTER_OF + " must be in the middle of the name while "
                     + BRACKET_PAIR + " must be at the end of the name";
     /*
      * The first character of the address must not be a whitespace,
