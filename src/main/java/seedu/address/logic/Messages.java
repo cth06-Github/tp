@@ -25,6 +25,11 @@ public class Messages {
             "This contact is not in address book, please use Full Name";
     public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
     public static final String MESSAGE_EMPTY_PREFIX_FIELD = "Fields cannot be empty";
+    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same name. "
+            + "Please delete by index.\nTip: find the contact's name to obtain their "
+            + "corresponding index, and delete by index directly on the page itself. "
+            + "Command to find :\n%1$s";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

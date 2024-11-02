@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "Deleting contacts using more than 1 way "
+            + "(both index and name for example) is not allowed";
+
     private static final int invalidTargetIndex = -1;
 
     private Index targetIndex;
@@ -54,6 +57,7 @@ public class DeleteCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (targetIndex == null) {
+            screenDuplicate(lastShownList);
             setTargetIndex(lastShownList);
         }
 
@@ -66,6 +70,19 @@ public class DeleteCommand extends Command {
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteContact(contactToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
+    }
+
+    private void screenDuplicate(List<Contact> lastShownList) throws CommandException {
+        long nameCount = lastShownList.stream()
+                .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
+                .count();
+        boolean hasDuplicate = nameCount > 1;
+        if (hasDuplicate) {
+            throw new CommandException(
+                    String.format(
+                            Messages.MESSAGE_DUPLICATE_NAME,
+                            String.format("find n/ %s", targetName.fullName)));
+        }
     }
 
     private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
